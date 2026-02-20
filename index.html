@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan - Harisna & Rahman</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- FontAwesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: {
+                            50: '#f4f7f4',
+                            100: '#e4ebe4',
+                            500: '#7a9b7c',
+                            800: '#3e5340',
+                        },
+                        gold: '#d4af37'
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'script': ['Great Vibes', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .spin-slow {
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Cover Transition */
+        .cover-transition {
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-sage-50 text-sage-800 font-sans antialiased overflow-hidden" id="body-container">
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <!-- Placeholder beautiful instrumental music -->
+        <source src="img/musik.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Music Button -->
+    <button id="music-btn" onclick="toggleMusic()"
+        class="hidden fixed bottom-6 right-6 z-50 bg-sage-800 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center">
+        <i id="music-icon" class="fas fa-compact-disc spin-slow text-xl"></i>
+    </button>
+
+    <!-- ==================== COVER SECTION ==================== -->
+    <section id="cover-page"
+        class="fixed inset-0 z-40 bg-cover bg-center cover-transition flex flex-col items-center justify-between py-12 px-6"
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop');">
+
+        <div class="text-center text-white mt-10">
+            <p class="uppercase tracking-widest text-sm mb-4">The Wedding Of</p>
+            <h1 class="font-script text-6xl md:text-8xl mb-4 text-gold drop-shadow-lg">Harisna & Rahman</h1>
+            <p class="text-lg font-light">20 Februari 2026</p>
+        </div>
+
+        <div class="text-center text-white mb-10 glass p-6 rounded-2xl max-w-sm w-full">
+            <p class="text-sm mb-2">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <!-- NAMA TAMU DIAMBIL DARI URL -->
+            <h2 id="guest-name" class="text-2xl font-bold mb-4 text-gold font-script text-4xl mt-2">Tamu Spesial</h2>
+            <p class="text-xs font-light mb-6 opacity-80">*Mohon maaf bila ada kesalahan penulisan nama/gelar</p>
+
+            <button onclick="openInvitation()"
+                class="bg-sage-500 hover:bg-sage-800 text-white px-8 py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg flex items-center justify-center mx-auto gap-2">
+                <i class="fas fa-envelope-open-text"></i> Buka Undangan
+            </button>
+        </div>
+    </section>
+
+    <!-- ==================== MAIN CONTENT (Hidden Initially) ==================== -->
+    <main id="main-content" class="hidden relative max-w-md md:max-w-xl mx-auto bg-white shadow-2xl min-h-screen">
+
+        <!-- Hero Section Inside -->
+        <section class="relative h-[80vh] flex flex-col items-center justify-center text-center px-6 bg-cover bg-center"
+            style="background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop');">
+            <div data-aos="zoom-in" data-aos-duration="1000">
+                <p class="text-sm tracking-widest uppercase mb-2 text-sage-500">Pernikahan</p>
+                <h2 class="font-script text-5xl text-sage-800 mb-6">Harisna & Rahman</h2>
+                <p class="italic text-sm text-gray-600 mb-8 px-4">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia
+                    menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram
+                    kepadanya..." <br><span class="font-bold">(QS. Ar-Rum: 21)</span></p>
+            </div>
+        </section>
+
+        <!-- Mempelai Section -->
+        <section class="py-20 px-6 bg-sage-50 text-center">
+            <h3 class="font-script text-4xl text-gold mb-10" data-aos="fade-up">Mempelai</h3>
+
+            <div class="flex flex-col gap-12">
+                <!-- Bride -->
+                <div data-aos="fade-right" class="flex flex-col items-center">
+                    <img src="img/harisna.jpeg" alt="Harisna"
+                        class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-4">
+                    <h4 class="font-script text-3xl text-sage-800 mb-2">Harisna</h4>
+                    <p class="text-sm text-gray-600">Putri dari<br>Bapak Junaidi & Ibu Sa'diah</p>
+                    <a href="#" class="text-sage-500 mt-2 text-xl hover:text-sage-800 transition"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+
+                <div data-aos="zoom-in" class="text-5xl font-script text-gold">&</div>
+
+                <!-- Groom -->
+                <div data-aos="fade-left" class="flex flex-col items-center">
+                    <img src="img/rahman.jpeg" alt="Rahman"
+                        class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg mb-4">
+                    <h4 class="font-script text-3xl text-sage-800 mb-2">Yansyah Abdul Rahman</h4>
+                    <p class="text-sm text-gray-600">Putra dari<br>Bapak Didi Surya & Ibu Arpiah</p>
+                    <a href="#" class="text-sage-500 mt-2 text-xl hover:text-sage-800 transition"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acara Section -->
+        <section class="py-20 px-6 bg-white text-center">
+            <h3 class="font-script text-4xl text-gold mb-10" data-aos="fade-up">Jadwal Acara</h3>
+
+            <div class="bg-sage-50 p-8 rounded-3xl shadow-sm border border-sage-100 mb-8 relative overflow-hidden"
+                data-aos="fade-up" data-aos-delay="100">
+                <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-ring text-6xl"></i></div>
+                <h4 class="font-bold text-xl mb-2 text-sage-800">Akad Nikah</h4>
+                <p class="text-sm mb-4"><i class="far fa-calendar-alt mr-2 text-sage-500"></i> Jumat, 20 Februari 2026
+                </p>
+                <p class="text-sm mb-4"><i class="far fa-clock mr-2 text-sage-500"></i> 08.00 WIB - Selesai</p>
+                <p class="text-sm font-semibold mb-1">Masjid Miftahul Khair</p>
+                <p class="text-xs text-gray-600 mb-4">Jl.Sungai Kusan Desa Sungai Rukam RT.03 No.11 Kecamatan Kusan Hulu
+                </p>
+                <a href="#" target="_blank"
+                    class="inline-block bg-sage-800 text-white text-sm px-5 py-2 rounded-full hover:bg-sage-500 transition"><i
+                        class="fas fa-map-marker-alt mr-1"></i> Google Maps</a>
+            </div>
+
+            <div class="bg-sage-50 p-8 rounded-3xl shadow-sm border border-sage-100 mb-10 relative overflow-hidden"
+                data-aos="fade-up" data-aos-delay="200">
+                <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-glass-cheers text-6xl"></i></div>
+                <h4 class="font-bold text-xl mb-2 text-sage-800">Resepsi</h4>
+                <p class="text-sm mb-4"><i class="far fa-calendar-alt mr-2 text-sage-500"></i> Sabtu, 21 Februari 2026
+                </p>
+                <p class="text-sm mb-4"><i class="far fa-clock mr-2 text-sage-500"></i> 11.00 WIB - 14.00 WIB</p>
+                <p class="text-sm font-semibold mb-1">Gedung Serumpun</p>
+                <p class="text-xs text-gray-600 mb-4">Jl.Sungai Kusan Desa Sungai Rukam RT.03 No.11 Kecamatan Kusan Hulu
+                </p>
+                <a href="#" target="_blank"
+                    class="inline-block bg-sage-800 text-white text-sm px-5 py-2 rounded-full hover:bg-sage-500 transition"><i
+                        class="fas fa-map-marker-alt mr-1"></i> Google Maps</a>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div data-aos="zoom-in">
+                <h4 class="font-bold text-lg mb-6 text-sage-800">Menuju Hari Bahagia</h4>
+                <div class="flex justify-center gap-3 text-center">
+                    <div class="bg-sage-800 text-white p-3 rounded-lg w-16">
+                        <span id="days" class="text-2xl font-bold">00</span>
+                        <p class="text-xs mt-1">Hari</p>
+                    </div>
+                    <div class="bg-sage-800 text-white p-3 rounded-lg w-16">
+                        <span id="hours" class="text-2xl font-bold">00</span>
+                        <p class="text-xs mt-1">Jam</p>
+                    </div>
+                    <div class="bg-sage-800 text-white p-3 rounded-lg w-16">
+                        <span id="mins" class="text-2xl font-bold">00</span>
+                        <p class="text-xs mt-1">Menit</p>
+                    </div>
+                    <div class="bg-sage-800 text-white p-3 rounded-lg w-16">
+                        <span id="secs" class="text-2xl font-bold">00</span>
+                        <p class="text-xs mt-1">Detik</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeri Section -->
+        <section class="py-20 px-6 bg-sage-50 text-center">
+            <h3 class="font-script text-4xl text-gold mb-10" data-aos="fade-up">Galeri</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <img data-aos="fade-up" data-aos-delay="100" src="img/kita1.jpeg"
+                    class="rounded-xl shadow-md w-full h-48 object-cover">
+                <img data-aos="fade-up" data-aos-delay="200" src="img/kita2.jpeg"
+                    class="rounded-xl shadow-md w-full h-48 object-cover">
+                <img data-aos="fade-up" data-aos-delay="300" src="img/kita3.jpeg"
+                    class="rounded-xl shadow-md w-full h-48 object-cover col-span-2">
+            </div>
+        </section>
+
+        <!-- Digital Gift Section -->
+        <section class="py-20 px-6 bg-white text-center">
+            <h3 class="font-script text-4xl text-gold mb-4" data-aos="fade-up">Kado Digital</h3>
+            <p class="text-sm text-gray-600 mb-8" data-aos="fade-up">Doa restu Anda merupakan karunia yang sangat
+                berarti bagi kami. Namun jika Bapak/Ibu/Saudara/i ingin memberikan tanda kasih, dapat melalui fitur di
+                bawah ini:</p>
+
+            <div class="bg-sage-50 p-6 rounded-2xl shadow border border-sage-100 mb-4" data-aos="fade-up">
+                <i class="fas fa-university text-3xl text-sage-500 mb-2"></i>
+                <h4 class="font-bold text-lg mb-1">Dana</h4>
+                <p class="text-2xl font-mono tracking-wider mb-2" id="rek-bca">082325350320</p>
+                <p class="text-sm mb-4">a.n Harisna</p>
+                <button onclick="copyText('rek-bca')"
+                    class="bg-sage-800 text-white text-xs px-4 py-2 rounded hover:bg-sage-500 transition">Salin No.
+                    Rekening</button>
+            </div>
+        </section>
+
+        <!-- RSVP & Wishes Form -->
+        <section class="py-20 px-6 bg-sage-50">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <h3 class="font-script text-4xl text-gold mb-2">Ucapan & Kehadiran</h3>
+                <p class="text-sm text-gray-600">Berikan doa dan konfirmasi kehadiran Anda.</p>
+            </div>
+
+            <form class="bg-white p-6 rounded-2xl shadow-md" data-aos="fade-up" onsubmit="submitRSVP(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="rsvp-name"
+                        class="w-full px-4 py-2 border rounded-lg focus:ring-sage-500 focus:border-sage-500 outline-none"
+                        placeholder="Nama Anda" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Kehadiran</label>
+                    <select
+                        class="w-full px-4 py-2 border rounded-lg focus:ring-sage-500 focus:border-sage-500 outline-none"
+                        required>
+                        <option value="">Pilih Kehadiran</option>
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir</option>
+                        <option value="Ragu-ragu">Masih Ragu-ragu</option>
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pesan & Doa</label>
+                    <textarea
+                        class="w-full px-4 py-2 border rounded-lg focus:ring-sage-500 focus:border-sage-500 outline-none"
+                        rows="4" placeholder="Tuliskan doa untuk mempelai..." required></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full bg-sage-800 text-white py-3 rounded-lg font-semibold hover:bg-sage-500 transition">Kirim
+                    Ucapan (Via WhatsApp)</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-sage-800 text-white text-center py-10 px-6">
+            <h2 class="font-script text-4xl text-gold mb-4">Harisna & Rahman</h2>
+            <p class="text-sm opacity-80 mb-6">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
+                Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+            <p class="text-xs opacity-50">&copy; 2026 Created with <i class="fas fa-heart text-red-500"></i> by You</p>
+        </footer>
+
+    </main>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Custom Logic -->
+    <script>
+        // 1. Mengambil Parameter URL untuk Nama Tamu
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const toParam = urlParams.get('to');
+
+            const guestNameElement = document.getElementById('guest-name');
+            if (toParam) {
+                // Mengganti tanda '+' atau '%20' dengan spasi
+                guestNameElement.innerHTML = toParam.replace(/\+/g, ' ');
+            } else {
+                guestNameElement.innerHTML = 'Bapak/Ibu/Saudara/i';
+            }
+        });
+
+        // 2. Fungsi Membuka Undangan & Mainkan Musik
+        function openInvitation() {
+            const cover = document.getElementById('cover-page');
+            const mainContent = document.getElementById('main-content');
+            const body = document.getElementById('body-container');
+            const musicBtn = document.getElementById('music-btn');
+            const audio = document.getElementById('bg-music');
+
+            // Transisi slide ke atas
+            cover.style.transform = 'translateY(-100vh)';
+
+            setTimeout(() => {
+                cover.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                body.classList.remove('overflow-hidden'); // Izinkan scroll
+                musicBtn.classList.remove('hidden'); // Tampilkan tombol musik
+
+                // Inisialisasi animasi AOS setelah konten terlihat
+                AOS.init({
+                    once: true, // Animasi hanya berjalan sekali
+                    offset: 50,
+                });
+            }, 800);
+
+            // Coba mainkan musik (membutuhkan interaksi user, tombol ini sudah interaksi)
+            audio.play().catch(error => console.log("Auto-play dicegah oleh browser."));
+        }
+
+        // 3. Kontrol Musik (Play/Pause)
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const icon = document.getElementById('music-icon');
+
+            if (audio.paused) {
+                audio.play();
+                icon.classList.add('spin-slow');
+                icon.classList.remove('fa-pause-circle');
+                icon.classList.add('fa-compact-disc');
+            } else {
+                audio.pause();
+                icon.classList.remove('spin-slow');
+                icon.classList.remove('fa-compact-disc');
+                icon.classList.add('fa-pause-circle');
+            }
+        }
+
+        // 4. Hitung Mundur (Countdown Timer)
+        // Set tanggal acara (Format: Tahun, Bulan (0-11), Tanggal, Jam, Menit)
+        // Bulan 1 = Februari (karena index mulai dari 0)
+        const countDownDate = new Date(2026, 1, 20, 8, 0, 0).getTime();
+
+        const x = setInterval(function () {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("mins").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("secs").innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("mins").innerHTML = "00";
+                document.getElementById("secs").innerHTML = "00";
+            }
+        }, 1000);
+
+        // 5. Fungsi Salin Nomor Rekening
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            // Gunakan metode fallback yang aman untuk iframe/browser
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Nomor Rekening berhasil disalin!");
+        }
+
+        // 6. Submit RSVP ke WhatsApp
+        function submitRSVP(event) {
+            event.preventDefault();
+            const name = document.getElementById('rsvp-name').value;
+            const status = event.target.elements[1].value;
+            const message = event.target.elements[2].value;
+
+            // Ganti dengan nomor WA mu (Gunakan kode negara 62)
+            const waNumber = "6281234567890";
+            const waText = `Halo, saya ${name}.%0A%0ASaya ingin mengonfirmasi bahwa saya *${status}* hadir di acara pernikahan Harisna & Rahman.%0A%0APesan/Doa:%0A"${message}"`;
+
+            window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>
